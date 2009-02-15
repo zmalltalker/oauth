@@ -50,8 +50,11 @@ script/destroy
 script/generate
 script/txt2html
 setup.rb
+spec/spec.opts
+spec/spec_helper.rb
 tasks/deployment.rake
 tasks/environment.rake
+tasks/rspec.rake
 tasks/website.rake
 test/cases/oauth_case.rb
 test/cases/spec/1_0-final/test_construct_request_url.rb
