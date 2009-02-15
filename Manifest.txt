@@ -50,6 +50,8 @@ script/destroy
 script/generate
 script/txt2html
 setup.rb
+spec/consumer_spec.rb
+spec/shared_consumer_examples.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/deployment.rake

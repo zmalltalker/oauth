@@ -25,60 +25,6 @@ class ConsumerTest < Test::Unit::TestCase
     @timestamp = "1199645624"
     @consumer.http=Net::HTTP.new(@request_uri.host, @request_uri.port)
   end
-  
-  def test_initializer
-    assert_equal "consumer_key_86cad9",@consumer.key
-    assert_equal "5888bf0345e5d237",@consumer.secret
-    assert_equal "http://blabla.bla",@consumer.site
-    assert_equal "/oauth/example/request_token.php",@consumer.request_token_path
-    assert_equal "/oauth/example/access_token.php",@consumer.access_token_path
-    assert_equal "http://blabla.bla/oauth/example/request_token.php",@consumer.request_token_url
-    assert_equal "http://blabla.bla/oauth/example/access_token.php",@consumer.access_token_url
-    assert_equal "http://blabla.bla/oauth/example/authorize.php",@consumer.authorize_url
-    assert_equal :header,@consumer.scheme
-    assert_equal :get,@consumer.http_method
-  end
-
-  def test_defaults
-    @consumer=OAuth::Consumer.new(
-      "key",
-      "secret",
-      {
-          :site=>"http://twitter.com"
-      })
-    assert_equal "key",@consumer.key
-    assert_equal "secret",@consumer.secret
-    assert_equal "http://twitter.com",@consumer.site
-    assert_equal "/oauth/request_token",@consumer.request_token_path
-    assert_equal "/oauth/access_token",@consumer.access_token_path
-    assert_equal "http://twitter.com/oauth/request_token",@consumer.request_token_url
-    assert_equal "http://twitter.com/oauth/access_token",@consumer.access_token_url
-    assert_equal "http://twitter.com/oauth/authorize",@consumer.authorize_url
-    assert_equal :header,@consumer.scheme
-    assert_equal :post,@consumer.http_method 
-  end
-
-  def test_override_paths
-    @consumer=OAuth::Consumer.new(
-      "key",
-      "secret",
-      {
-          :site=>"http://twitter.com",
-          :request_token_url=>"http://oauth.twitter.com/request_token",
-          :access_token_url=>"http://oauth.twitter.com/access_token",
-          :authorize_url=>"http://site.twitter.com/authorize"
-      })
-    assert_equal "key",@consumer.key
-    assert_equal "secret",@consumer.secret
-    assert_equal "http://twitter.com",@consumer.site
-    assert_equal "/oauth/request_token",@consumer.request_token_path
-    assert_equal "/oauth/access_token",@consumer.access_token_path
-    assert_equal "http://oauth.twitter.com/request_token",@consumer.request_token_url
-    assert_equal "http://oauth.twitter.com/access_token",@consumer.access_token_url
-    assert_equal "http://site.twitter.com/authorize",@consumer.authorize_url
-    assert_equal :header,@consumer.scheme
-    assert_equal :post,@consumer.http_method 
-  end
 
   def test_that_signing_auth_headers_on_get_requests_works
     request = Net::HTTP::Get.new(@request_uri.path + "?" + request_parameters_to_s)

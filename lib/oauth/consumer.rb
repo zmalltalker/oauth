@@ -15,14 +15,18 @@ module OAuth
     end
     CA_FILE = nil unless defined?(CA_FILE)
 
+    DEFAULT_AUTHORIZE_PATH     = "/oauth/authorize"
+    DEFAULT_ACCESS_TOKEN_PATH  = "/oauth/access_token"
+    DEFAULT_REQUEST_TOKEN_PATH = "/oauth/request_token"
+
     @@default_options = {
       # Signature method used by server. Defaults to HMAC-SHA1
       :signature_method   => 'HMAC-SHA1',
 
       # default paths on site. These are the same as the defaults set up by the generators
-      :request_token_path => '/oauth/request_token',
-      :authorize_path     => '/oauth/authorize',
-      :access_token_path  => '/oauth/access_token',
+      :request_token_path => DEFAULT_REQUEST_TOKEN_PATH,
+      :authorize_path     => DEFAULT_AUTHORIZE_PATH,
+      :access_token_path  => DEFAULT_ACCESS_TOKEN_PATH,
 
       # How do we send the oauth values to the server see
       # http://oauth.net/core/1.0/#consumer_req_param for more info
@@ -184,14 +188,17 @@ module OAuth
       @options[:scheme]
     end
 
+    # TODO deprecate me in favor of *_url methods
     def request_token_path
       @options[:request_token_path]
     end
 
+    # TODO deprecate me in favor of *_url methods
     def authorize_path
       @options[:authorize_path]
     end
 
+    # TODO deprecate me in favor of *_url methods
     def access_token_path
       @options[:access_token_path]
     end
