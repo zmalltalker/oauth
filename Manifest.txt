@@ -51,8 +51,10 @@ script/generate
 script/txt2html
 setup.rb
 spec/consumer_spec.rb
+spec/net_http_client_spec.rb
 spec/request_token_spec.rb
 spec/shared_consumer_examples.rb
+spec/shared_net_http_client_examples.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/deployment.rake
