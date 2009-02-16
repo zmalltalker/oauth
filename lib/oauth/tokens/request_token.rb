@@ -20,8 +20,13 @@ module OAuth
     # construct an authorization url
     def build_authorize_url(base_url, params)
       uri = URI.parse(base_url.to_s)
-      # TODO doesn't handle array values correctly
-      uri.query = params.map { |k,v| [k, CGI.escape(v)] * "=" } * "&"
+
+      uri.query = params.map do |k,v|
+        v.collect do |val|
+          [k, CGI.escape(val)] * "="
+        end * "&"
+      end * "&"
+
       uri.to_s
     end
   end

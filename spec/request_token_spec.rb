@@ -26,5 +26,11 @@ describe OAuth::RequestToken do
       uri = URI.parse(@instance.authorize_url(:foo => "bar"))
       uri.query.should match(/foo=bar/)
     end
+
+    it "should include multi-valued parameters in the querystring" do
+      uri = URI.parse(@instance.authorize_url(:foo => ["bar", "baz"]))
+      uri.query.should match(/foo=bar/)
+      uri.query.should match(/foo=baz/)
+    end
   end
 end
