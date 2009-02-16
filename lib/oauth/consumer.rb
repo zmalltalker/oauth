@@ -100,6 +100,11 @@ module OAuth
       end
     end
 
+    def get_access_token(request_token, request_options = {})
+      response = token_request(http_method, (access_token_url? ? access_token_url : access_token_path), request_token, request_options)
+      OAuth::AccessToken.from_hash(self, response)
+    end
+
     # Makes a request to the service for a new OAuth::RequestToken
     #
     #  @request_token = @consumer.get_request_token
@@ -265,17 +270,17 @@ module OAuth
 
       case http_method
       when :post
-        request = Net::HTTP::Post.new(path,headers)
+        request = Net::HTTP::Post.new(path, headers)
         request["Content-Length"] = 0 # Default to 0
       when :put
-        request = Net::HTTP::Put.new(path,headers)
+        request = Net::HTTP::Put.new(path, headers)
         request["Content-Length"] = 0 # Default to 0
       when :get
-        request = Net::HTTP::Get.new(path,headers)
+        request = Net::HTTP::Get.new(path, headers)
       when :delete
-        request =  Net::HTTP::Delete.new(path,headers)
+        request =  Net::HTTP::Delete.new(path, headers)
       when :head
-        request = Net::HTTP::Head.new(path,headers)
+        request = Net::HTTP::Head.new(path, headers)
       else
         raise ArgumentError, "Don't know how to handle http_method: :#{http_method.to_s}"
       end
