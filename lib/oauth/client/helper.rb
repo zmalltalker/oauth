@@ -7,7 +7,7 @@ require 'oauth/signature/hmac/sha1'
 module OAuth
   module Client
     class Helper
-      attr_reader :options
+      attr_reader :options, :request
 
       def initialize(request, options = {})
         @request = request
@@ -34,11 +34,11 @@ module OAuth
       end
 
       def signature(extra_options = {})
-        OAuth::Signature.sign(@request, parameters_for_signing(extra_options))
+        OAuth::Signature.sign(request, parameters_for_signing(extra_options))
       end
 
       def signature_base_string(extra_options = {})
-        OAuth::Signature.signature_base_string(@request, parameters_for_signing(extra_options))
+        OAuth::Signature.signature_base_string(request, parameters_for_signing(extra_options))
       end
 
       def form_data
@@ -55,10 +55,10 @@ module OAuth
         "OAuth #{realm}#{header_params_str}"
       end
 
-      def path(base_path)
+      def path
         oauth_params_str = oauth_parameters.map { |k,v| [OAuth::Helper.escape(k), OAuth::Helper.escape(v)] * "=" } * "&"
 
-        uri = URI.parse(base_path)
+        uri = URI.parse(request.path)
         uri.query = [uri.query, oauth_params_str].compact * "&"
         uri.query << "&oauth_signature=#{OAuth::Helper.escape(signature)}"
 
@@ -66,7 +66,7 @@ module OAuth
       end
 
       def parameters
-        OAuth::RequestProxy.proxy(@request).parameters
+        OAuth::RequestProxy.proxy(request).parameters
       end
 
       def parameters_with_oauth

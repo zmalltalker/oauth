@@ -73,7 +73,7 @@ module OAuth
         end
 
         def set_oauth_query_string
-          self.path = oauth_helper.path(path)
+          self.path = oauth_helper.path
         end
       end
     end
