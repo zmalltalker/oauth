@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'active_support'
+require 'rack/request'
 require 'action_controller/request'
 require 'oauth/request_proxy/base'
 require 'uri'

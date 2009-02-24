@@ -59,9 +59,9 @@ module OAuth
       @secret = consumer_secret
 
       # ensure that keys are symbols
-      @options = @@default_options.merge(options.inject({}) { |options, (key, value)|
-        options[key.to_sym] = value
-        options
+      @options = @@default_options.merge(options.inject({}) { |opts, (key, value)|
+        opts[key.to_sym] = value
+        opts
       })
     end
 
@@ -197,6 +197,10 @@ module OAuth
       end
 
       http_object = Net::HTTP.new(our_uri.host, our_uri.port)
+      if our_uri.scheme == 'https'
+        http_object.use_ssl = true
+        http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      end
       http_object.use_ssl = true if our_uri.scheme == "https"
 
       http_object

@@ -1,3 +1,4 @@
+$:.unshift(File.join(File.dirname(__FILE__)))
 require 'oauth/oauth'
 require 'oauth/client/helper'
 require 'oauth/signature/hmac/sha1'
