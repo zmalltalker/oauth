@@ -57,7 +57,7 @@ private
   # the body. this is broken, and should be fixed.
   def set_oauth_body
     self.set_form_data(@oauth_helper.parameters_with_oauth)
-    params_with_sig = @oauth_helper.parameters.merge(:oauth_signature => @oauth_helper.signature)
+    params_with_sig = @oauth_helper.parameters.merge('oauth_signature' => @oauth_helper.signature)
     self.set_form_data(params_with_sig)
   end
 
