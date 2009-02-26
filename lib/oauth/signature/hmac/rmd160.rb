@@ -1,6 +1,7 @@
 require 'oauth/signature/hmac/base'
-require 'hmac-rmd160'
-
+if RUBY_VERSION < '1.9'
+  require 'hmac-rmd160' 
+end
 module OAuth::Signature::HMAC
   class RMD160 < Base
     implements 'hmac-rmd160'

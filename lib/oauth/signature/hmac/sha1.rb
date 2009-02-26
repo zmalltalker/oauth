@@ -1,6 +1,8 @@
 require 'oauth/signature/hmac/base'
 require 'rubygems'
-require 'hmac-sha1'
+if RUBY_VERSION < '1.9'
+  require 'hmac-sha1' 
+end
 
 module OAuth::Signature::HMAC
   class SHA1 < Base

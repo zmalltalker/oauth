@@ -1,6 +1,7 @@
 require 'oauth/signature/hmac/base'
-require 'hmac-md5'
-
+if RUBY_VERSION < '1.9'
+  require 'hmac-md5' 
+end
 module OAuth::Signature::HMAC
   class MD5 < Base
     implements 'hmac-md5'
