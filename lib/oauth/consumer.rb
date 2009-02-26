@@ -235,6 +235,7 @@ module OAuth
       end
 
       http_object = Net::HTTP.new(our_uri.host, our_uri.port)
+
       http_object.use_ssl = (our_uri.scheme == 'https')
 
       if CA_FILE
@@ -244,6 +245,7 @@ module OAuth
       else
         http_object.verify_mode = OpenSSL::SSL::VERIFY_NONE
       end
+
       http_object
     end
 
