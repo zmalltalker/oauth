@@ -14,9 +14,12 @@ $hoe = Hoe.new('oauth', OAuth::VERSION) do |p|
   p.rubyforge_name       = p.name # TODO this is default value
   p.url = "http://oauth.rubyforge.org"
 
-  p.extra_deps         = [
-    ['ruby-hmac','>= 0.3.1']
-  ]
+  if RUBY_VERSION < '1.9'
+    p.extra_deps         = [
+      ['ruby-hmac','>= 0.3.1']
+    ]
+  end
+  
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"],
     ['actionpack'],
