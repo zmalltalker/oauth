@@ -9,11 +9,7 @@ module OAuth::Signature
     end
 
     def ==(cmp_signature)
-      if cmp_signature.is_a?(Array)   # Ruby 1.9
-        return signature == escape(cmp_signature.first)
-      else
-        return signature == escape(cmp_signature)
-      end
+      signature == escape(cmp_signature.to_s)
     end
 
     def signature_base_string
