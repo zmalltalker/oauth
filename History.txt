@@ -1,4 +1,4 @@
-== 0.3.2
+== 0.3.2 
 
 * Verify SSL certificates if CA certificates are available (Seth)
 * Fixed ActionController parameter escaping behavior (Thiago Arrais, László
